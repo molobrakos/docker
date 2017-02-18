@@ -15,7 +15,7 @@ RUN apk add --no-cache --update \
     && rm -rf /var/cache/apk/* \
     ;
 
-RUN pip3 install --no-cache-dir --upgrade homeassistant netdisco pychromecast
+RUN pip3 install --no-cache-dir --upgrade homeassistant
 
 EXPOSE 8123
 
