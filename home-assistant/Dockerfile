@@ -12,10 +12,11 @@ RUN apk add --no-cache --update \
     nmap \
     libsodium \
     ; \
-    pip3 install --no-cache-dir --upgrade homeassistant; \
+    pip3 install --no-cache-dir --upgrade homeassistant \
     ; \
     rm -r /root/.cache; \
-    rm -rf /var/cache/apk/*;
+    rm -rf /var/cache/apk/*
+
 
 EXPOSE 8123
 
