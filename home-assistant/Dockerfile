@@ -13,7 +13,7 @@ RUN apk add --no-cache --update \
     libsodium \
     curl \
     ; \
-    pip3 install --no-cache-dir --upgrade homeassistant \
+    pip3 install --no-cache-dir --upgrade homeassistant colorlog \
     ; \
     rm -rf /root/.cache && \
     rm -rf /var/cache/apk/* \
