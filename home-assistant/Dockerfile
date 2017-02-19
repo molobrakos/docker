@@ -25,6 +25,6 @@ USER hass
 
 EXPOSE 8123
 
-HEALTHCHECK CMD curl -f http://localhost:8123/ || exit 1
+HEALTHCHECK CMD curl -f http://localhost:8123/api/ || exit 1
 
 CMD [ "hass", "--config", "/config" ]
