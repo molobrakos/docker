@@ -11,6 +11,7 @@ RUN apk add --no-cache --update \
     linux-headers \
     nmap \
     libsodium \
+    curl \
     ; \
     pip3 install --no-cache-dir --upgrade homeassistant \
     ; \
