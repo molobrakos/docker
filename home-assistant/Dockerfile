@@ -15,9 +15,13 @@ RUN apk add --no-cache --update \
     ; \
     pip3 install --no-cache-dir --upgrade homeassistant \
     ; \
-    rm -r /root/.cache; \
-    rm -rf /var/cache/apk/*
+    rm -rf /root/.cache && \
+    rm -rf /var/cache/apk/* \
+    ; \
+    adduser -H -D -s /bin/false hass
+    ;
 
+USER hass
 
 EXPOSE 8123
 
