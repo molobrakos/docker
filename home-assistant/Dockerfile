@@ -18,7 +18,7 @@ RUN apk add --no-cache --update \
     rm -rf /root/.cache && \
     rm -rf /var/cache/apk/* \
     ; \
-    adduser -H -D -s /bin/false hass
+    adduser -H -D -s /bin/false hass \
     ;
 
 USER hass
