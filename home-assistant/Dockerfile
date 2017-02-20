@@ -19,6 +19,8 @@ RUN apk add --no-cache --update \
     rm -rf /var/cache/apk/* \
     ; \
     adduser -H -D -s /bin/false hass \
+    ; \
+    chmod u+s /bin/ping \
     ;
 
 USER hass
