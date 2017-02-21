@@ -21,10 +21,6 @@ RUN apk add --no-cache --update \
     chmod u+s /bin/ping \
     ;
 
-USER hass
-
 EXPOSE 8123
 
 HEALTHCHECK CMD curl -f http://localhost:8123/api/ || exit 1
-
-CMD [ "hass", "--config", "/config" ]
