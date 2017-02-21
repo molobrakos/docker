@@ -1,7 +1,5 @@
 FROM python:3-alpine
 
-MAINTAINER molobrakos
-
 VOLUME /config
 WORKDIR /app
 
@@ -13,8 +11,8 @@ RUN apk add --no-cache --update \
     libsodium \
     curl \
     ; \
-    pip3 install --no-cache-dir --upgrade homeassistant colorlog \
-    ; \
+    pip3 install --no-cache-dir --upgrade colorlog \
+    ; }
     rm -rf /root/.cache && \
     rm -rf /var/cache/apk/* \
     ; \
