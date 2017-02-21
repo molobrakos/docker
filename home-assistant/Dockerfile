@@ -12,7 +12,7 @@ RUN apk add --no-cache --update \
     curl \
     ; \
     pip3 install --no-cache-dir --upgrade colorlog \
-    ; }
+    ; \
     rm -rf /root/.cache && \
     rm -rf /var/cache/apk/* \
     ; \
