@@ -2,3 +2,6 @@ FROM molobrakos/home-assistant:base
 
 RUN pip3 install --no-cache-dir --upgrade \
     home-assistant
+
+USER hass
+CMD [ "hass", "--config", "/config"]
