@@ -1,0 +1,5 @@
+FROM molobrakos/home-assistant:base
+
+RUN pip3 install --no-cache-dir --upgrade \
+    https://github.com/home-assistant/home-assistant/archive/dev.zip \ # homeassistant \
+    ;
