@@ -21,7 +21,7 @@ RUN apt-get update && \
 
 EXPOSE 3483 3483/udp 9000
 
-HEALTHCHECK CMD curl -f http://localhost:9000 || exit 1
+HEALTHCHECK CMD curl -f -d '{"id":1,"method":"slim.request","params":["",["serverstatus",""]]}' http://localhost:9000/jsonrpc.js || exit 1
 
 USER lms
 
