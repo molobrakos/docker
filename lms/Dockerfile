@@ -8,8 +8,8 @@ VOLUME /config /music /logs /cache
 WORKDIR /lms
 
 RUN apt-get update && \
-    apt-get -y install wget supervisor faad flac lame sox libio-socket-ssl-perl && \
-    wget -q http://downloads.slimdevices.com/LogitechMediaServer_v7.9.0/logitechmediaserver_7.9.0_amd64.deb && \
+    apt-get -y install curl supervisor faad flac lame sox libio-socket-ssl-perl && \
+    curl -Os http://downloads.slimdevices.com/LogitechMediaServer_v7.9.0/logitechmediaserver_7.9.0_amd64.deb && \
     dpkg -i *.deb && \
     rm -f *.deb && \
     apt-get -y autoremove && \
