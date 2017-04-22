@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG=$HOME/.home-assistant.docker
+CONFIG=$HOME/.docker-home-assistant
 
 mkdir -p $CONFIG
 
