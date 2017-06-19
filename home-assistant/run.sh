@@ -7,6 +7,7 @@ mkdir -p $CONFIG
 docker run \
 -d \
 --name home-assistant \
+--restart=always \
 -p 8123:8123/tcp \
 -v /etc/localtime:/etc/localtime:ro \
 -v $CONFIG:/config \
