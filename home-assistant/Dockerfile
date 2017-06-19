@@ -18,7 +18,7 @@ RUN apk add --no-cache --update \
 	&& \
     adduser -H -D -s /bin/false home-assistant \
 	&& \
-    chmod u+s /bin/ping \
+    chmod u+s /bin/ping \   # https://github.com/gliderlabs/docker-alpine/issues/253
     ;
 
 EXPOSE 8123
