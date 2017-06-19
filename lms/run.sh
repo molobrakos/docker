@@ -13,6 +13,7 @@ mkdir -p $LOG_DIR
 mkdir -p $MUSIC_DIR
 
 docker run -d --name lms \
+       --restart=always \
        -p 9000:9000 \
        -p 3483:3483 \
        -p 3483:3483/udp \
