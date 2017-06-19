@@ -1,21 +1,21 @@
 #!/bin/bash
 
 IMAGE=molobrakos/home-assistant:latest
-NAME=home-assistant
+CONTAINER=home-assistant
 CONFIG=$HOME/.docker-home-assistant/config
 mkdir -p $CONFIG
 
-docker stop $NAME
-docker rm $NAME
+docker stop $CONTAINER
+docker rm $CONTAINER
 docker pull $IMAGE
 
 docker run \
 -d \
---name $NAME \
+--name $CONTAINER \
 -p 8123:8123/tcp \
 -v /etc/localtime:/etc/localtime:ro \
 -v $CONFIG:/config \
 $IMAGE
 
-docker logs -f $NAME
+docker logs -f $CONTAINER
 
