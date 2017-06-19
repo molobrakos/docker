@@ -10,6 +10,7 @@ RUN apk add --no-cache --update \
     nmap \
     libsodium \
     curl \
+	ffmpeg \
 	&& \
     pip3 install --no-cache-dir --upgrade colorlog \
 	&& \
