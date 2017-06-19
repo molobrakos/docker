@@ -1,6 +1,6 @@
 FROM debian:stretch
 
-VOLUME /config
+VOLUME /config /media
 WORKDIR /app
 
 RUN apt-get update -y && apt-get install -q --yes --no-install-recommends \
@@ -40,9 +40,8 @@ CMD test -e /config/motion.conf ||  cp /usr/local/etc/motion/motion-dist.conf /c
     sed -i 's/\/etc\/motioneye/\/config/' /config/motioneye.conf && \
     sed -i 's/\/var\/run/\/config/' /config/motioneye.conf && \
     sed -i 's/\/var\/log/\/config/' /config/motioneye.conf && \
-    sed -i 's/\/var\/lib\/motioneye/\/config/' /config/motioneye.conf && \
+    sed -i 's/\/var\/lib\/motioneye/\/media/' /config/motioneye.conf && \
     meyectl startserver -c /config/motioneye.conf -d
-
 
 HEALTHCHECK CMD curl -f http://localhost:8765/ && \
                 curl -f http://localhost:8080 && \
