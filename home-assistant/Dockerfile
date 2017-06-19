@@ -10,16 +10,17 @@ RUN apk add --no-cache --update \
     nmap \
     libsodium \
     curl \
-	ffmpeg \
-	&& \
+        ffmpeg \
+        && \
     pip3 install --no-cache-dir --upgrade colorlog \
-	&& \
+        && \
     rm -rf /root/.cache && \
     rm -rf /var/cache/apk/* \
-	&& \
+        && \
     adduser -H -D -s /bin/false home-assistant \
-	&& \
-    chmod u+s /bin/ping \   # https://github.com/gliderlabs/docker-alpine/issues/253
+        && \
+    # https://github.com/gliderlabs/docker-alpine/issues/253
+    chmod u+s /bin/ping \
     ;
 
 EXPOSE 8123
