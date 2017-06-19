@@ -19,7 +19,7 @@ RUN apt-get update && \
     rm -rf /var/tmp/* && \
     useradd --user-group --home-dir /lms --shell /bin/false lms
 
-EXPOSE 3483 3483/udp 9000
+EXPOSE 3483 3483/udp 9000 9090
 
 HEALTHCHECK CMD curl -f -d '{"id":1,"method":"slim.request","params":["",["serverstatus"]]}' http://localhost:9000/jsonrpc.js || exit 1
 
