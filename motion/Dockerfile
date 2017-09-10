@@ -16,7 +16,8 @@ RUN apt-get update -y && apt-get install -q --yes --no-install-recommends \
   x264 \
   python python-dev python-pip python-setuptools python-wheel \
   lsb-release pkg-config curl libcurl4-openssl-dev && \
-  apt-get clean
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 RUN curl -sL https://github.com/Motion-Project/motion/archive/release-4.0.1.tar.gz | tar xz && \
    cd motion-release-4.0.1 && \
@@ -41,6 +42,7 @@ CMD test -e /config/motion.conf ||  cp /usr/local/etc/motion/motion-dist.conf /c
     sed -i 's/\/var\/run/\/config/' /config/motioneye.conf && \
     sed -i 's/\/var\/log/\/config/' /config/motioneye.conf && \
     sed -i 's/\/var\/lib\/motioneye/\/media/' /config/motioneye.conf && \
+    sed -i 's/log_level debug/log_level info/' /config/motioneye.conf && \
     meyectl startserver -c /config/motioneye.conf -d
 
 HEALTHCHECK CMD curl -f http://localhost:8765/ && \
