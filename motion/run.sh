@@ -1,5 +1,4 @@
-MEDIA=$HOME/media
-
+MEDIA=/mnt/media
 CONFIG=$HOME/.docker-motion
 mkdir -p $CONFIG
 
