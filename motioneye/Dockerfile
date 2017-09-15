@@ -32,7 +32,7 @@ RUN pip install motioneye
 
 RUN adduser --no-create-home --disabled-password --gecos '' --shell /bin/false motion
 
-EXPOSE 8080 8081 8765
+EXPOSE 8080 8081 8082 8765
 
 USER motion
 
