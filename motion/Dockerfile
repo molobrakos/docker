@@ -36,6 +36,8 @@ EXPOSE 8080 8081 8765
 
 USER motion
 
+COPY upload /app
+
 CMD test -e /config/motion.conf ||  cp /usr/local/etc/motion/motion-dist.conf /config/motion.conf && \
     test -e /config/motioneye.conf || cp /usr/local/share/motioneye/extra/motioneye.conf.sample /config/motioneye.conf && \
     sed -i 's/\/etc\/motioneye/\/config/' /config/motioneye.conf && \
