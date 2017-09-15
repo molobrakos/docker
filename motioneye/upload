@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import logging
-import yaml
+import json
 import sys
 import os.path
 import motioneye.uploadservices
@@ -10,16 +10,17 @@ logging.basicConfig(level=logging.DEBUG)
 
 len(sys.argv) < 2 and exit('needs \'auth\' or filename')
 
-print(sys.argv)
-
-CREDENTIALS = '/config/.gcredentials.yaml'
-with open(CREDENTIALS) as f:
-    g = motioneye.uploadservices.GoogleDrive(0)
-    g.load(yaml.safe_load(f))
+CREDENTIALS = '/config/.gcredentials.json'
+try:
+    with open(CREDENTIALS) as f:
+        g = motioneye.uploadservices.GoogleDrive(0)
+        g.load(json.load(f))
+except:
+    exit('could not read %s' % CREDENTIALS)
 
 def save(self):
     with open(CREDENTIALS, "w") as f:
-        yaml.dump(self.dump(), f, default_flow_style=False, encoding='utf-8')
+        json.dump(self.dump(), f)
         
 motioneye.uploadservices.GoogleDrive.save = save
 
