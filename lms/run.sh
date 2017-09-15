@@ -20,6 +20,7 @@ docker rm $CONTAINER
 docker pull $IMAGE
 
 docker run -d --name $CONTAINER \
+       --restart=always \
        -p 9000:9000 \
        -p 3483:3483 \
        -p 3483:3483/udp \
@@ -29,4 +30,3 @@ docker run -d --name $CONTAINER \
        -v $LOG_DIR:/logs \
        -v $MUSIC_DIR:/music \
        $IMAGE
-

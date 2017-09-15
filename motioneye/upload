@@ -1,0 +1,41 @@
+#!/usr/bin/python
+
+import logging
+import json
+import sys
+import os.path
+import motioneye.uploadservices
+
+logging.basicConfig(level=logging.DEBUG)
+
+len(sys.argv) < 2 and exit('needs \'auth\' or filename')
+
+CREDENTIALS = '/config/.gcredentials.json'
+try:
+    with open(CREDENTIALS) as f:
+        g = motioneye.uploadservices.GoogleDrive(0)
+        g.load(json.load(f))
+except:
+    exit('could not read %s' % CREDENTIALS)
+
+def save(self):
+    with open(CREDENTIALS, "w") as f:
+        json.dump(self.dump(), f)
+        
+motioneye.uploadservices.GoogleDrive.save = save
+
+arg = sys.argv[1]
+
+if arg == 'auth':
+    exit(g.get_authorize_url())
+elif not os.path.exists(arg):
+    exit('file not found %s' % arg)
+    
+try:
+    g.test_access()
+except Exception as e:
+    exit('could not connect', e)
+
+print('uploading %s' % arg)
+    
+g.upload_file(None, arg)
