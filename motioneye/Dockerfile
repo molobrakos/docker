@@ -48,5 +48,4 @@ CMD test -e /config/motion.conf ||  cp /usr/local/etc/motion/motion-dist.conf /c
     meyectl startserver -c /config/motioneye.conf -d
 
 HEALTHCHECK CMD curl -f http://localhost:8765/ && \
-                curl -f http://localhost:8080 && \
-                curl -f http://localhost:8081 || exit 1
+                curl -s -f --connect-timeout 5 --head -o /dev/null http://localhost:8081 || exit 1

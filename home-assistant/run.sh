@@ -18,5 +18,3 @@ docker run \
 -v $CONFIG:/config \
 $IMAGE
 
-docker logs -f $CONTAINER
-
