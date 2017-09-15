@@ -1,8 +1,13 @@
+NAME=motioneye
+IMAGE=molobrakos/$NAME
+CONTAINER=$NAME
+
 MEDIA=/mnt/media
-CONFIG=$HOME/.docker-motion
+CONFIG=$HOME/.docker-$NAME
 mkdir -p $CONFIG
 
-docker rm -f motioneye ; docker run -it --name=motioneye \
+docker rm -f $CONTAINER
+docker run -it --name=$CONTAINER \
 -d \
 -p 8080:8080 \
 -p 8081:8081 \
@@ -11,4 +16,4 @@ docker rm -f motioneye ; docker run -it --name=motioneye \
 -v $CONFIG:/config \
 -v $MEDIA:/media \
 --restart=always \
-molobrakos/motion
+$IMAGE
