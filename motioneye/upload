@@ -36,6 +36,11 @@ try:
 except Exception as e:
     exit('could not connect', e)
 
-print('uploading %s' % arg)
-    
-g.upload_file(None, arg)
+if len(sys.argv) == 3:
+    dst = sys.argv[2]
+    print('uploading %s to %s' % (arg, dst))
+else:
+    dst = None
+    print('uploading %s' % arg)
+
+g.upload_file(dst, arg)
