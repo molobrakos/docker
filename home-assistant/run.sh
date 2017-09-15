@@ -11,6 +11,7 @@ docker pull $IMAGE
 
 docker run \
 -d \
+--restart=always \
 --name $CONTAINER \
 -p 8123:8123/tcp \
 -v /etc/localtime:/etc/localtime:ro \

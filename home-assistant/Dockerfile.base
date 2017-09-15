@@ -19,9 +19,10 @@ RUN apk add --no-cache --update \
 	&& \
     adduser -H -D -s /bin/false home-assistant \
 	&& \
+    # https://github.com/gliderlabs/docker-alpine/issues/253
     chmod u+s /bin/ping \
     ;
 
 EXPOSE 8123
 
-HEALTHCHECK CMD curl -f http://localhost:8123/api/ || exit 1
+HEALTHCHECK CMD curl -f -s -o /dev/null http://localhost:8123/api/ || exit 1
