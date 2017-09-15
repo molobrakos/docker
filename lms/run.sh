@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR=$HOME/.lms
+DIR=$HOME/.docker-lms
 
 CONFIG_DIR=$DIR/config
 CACHE_DIR=$DIR/cache
