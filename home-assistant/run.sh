@@ -1,8 +1,8 @@
 #!/bin/bash
 
-IMAGE=molobrakos/home-assistant:latest
 CONTAINER=home-assistant
-CONFIG=$HOME/.docker-home-assistant/config
+IMAGE=molobrakos/$CONTAINER:latest
+CONFIG=$HOME/.docker-$CONTAINER/config
 mkdir -p $CONFIG
 
 docker stop $CONTAINER
