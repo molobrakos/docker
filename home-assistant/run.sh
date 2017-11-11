@@ -6,9 +6,9 @@ IMAGE=molobrakos/$CONTAINER:$TAG
 CONFIG=$HOME/.docker-$CONTAINER/config
 mkdir -p $CONFIG
 
+docker pull $IMAGE
 docker stop $CONTAINER
 docker rm $CONTAINER
-docker pull $IMAGE
 
 docker run \
 -d \
@@ -19,4 +19,3 @@ docker run \
 -v /etc/localtime:/etc/localtime:ro \
 -v $CONFIG:/config \
 $IMAGE
-
