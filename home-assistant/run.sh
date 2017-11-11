@@ -1,7 +1,8 @@
 #!/bin/bash
 
+TAG=latest
 CONTAINER=home-assistant
-IMAGE=molobrakos/$CONTAINER:latest
+IMAGE=molobrakos/$CONTAINER:$TAG
 CONFIG=$HOME/.docker-$CONTAINER/config
 mkdir -p $CONFIG
 
