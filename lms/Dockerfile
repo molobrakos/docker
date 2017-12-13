@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM debian:stable-slim
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
@@ -11,7 +11,8 @@ RUN apt-get update && \
     apt-get -y install curl pv supervisor faad flac lame sox libio-socket-ssl-perl && \
     curl -Os \
     # http://downloads.slimdevices.com/LogitechMediaServer_v7.9.1/logitechmediaserver_7.9.1_amd64.deb && \
-    http://downloads-origin.slimdevices.com/nightly/7.9/sc/ffc273f/logitechmediaserver_7.9.1~1508904967_amd64.deb && \
+    #http://downloads-origin.slimdevices.com/nightly/7.9/sc/ffc273f/logitechmediaserver_7.9.1~1508904967_amd64.deb && \
+    http://downloads-origin.slimdevices.com/nightly/7.9/sc/184cc48/logitechmediaserver_7.9.1~1512734075_amd64.deb && \
     dpkg -i *.deb && \
     rm -f *.deb && \
     apt-get -y autoremove && \
