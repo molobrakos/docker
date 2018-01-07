@@ -19,14 +19,14 @@ RUN apt-get update -y && apt-get install -q --yes --no-install-recommends \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://github.com/Motion-Project/motion/archive/release-4.0.1.tar.gz | tar xz && \
-   cd motion-release-4.0.1 && \
+RUN curl -sL https://github.com/Motion-Project/motion/archive/release-4.1.1.tar.gz | tar xz && \
+   cd motion-release-4.1.1 && \
    autoreconf -fiv && \
    ./configure && \
    make && \
    make install && \
    cd .. && \
-   rm -rf motion-release-4.0.1
+   rm -rf motion-release-4.1.1
 
 RUN pip install motioneye
 
