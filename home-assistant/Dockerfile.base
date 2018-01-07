@@ -5,20 +5,22 @@ WORKDIR /app
 
 RUN apk add --no-cache --update \
     gcc \
+    g++ \
+    make \
     musl-dev \
     linux-headers \
     nmap \
     libsodium \
     curl \
-	ffmpeg \
-	&& \
-    pip3 install --no-cache-dir --upgrade colorlog \
-	&& \
+        ffmpeg \
+        && \
+    pip3 install --no-cache-dir --upgrade colorlog cchardet cython uvloop \
+        && \
     rm -rf /root/.cache && \
     rm -rf /var/cache/apk/* \
-	&& \
+        && \
     adduser -H -D -s /bin/false home-assistant \
-	&& \
+        && \
     # https://github.com/gliderlabs/docker-alpine/issues/253
     chmod u+s /bin/ping \
     ;
