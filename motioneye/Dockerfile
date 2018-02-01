@@ -11,7 +11,7 @@ RUN apt-get update -y && apt-get install -q --yes --no-install-recommends \
   libavformat-dev libavcodec-dev libavutil-dev libav-tools libavdevice-dev libswscale-dev \
   libsqlite3-dev \
   v4l-utils python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev ffmpeg \
-  libjpeg-dev \
+  libjpeg-dev libwebp-dev \
   libzip-dev \
   x264 \
   python python-dev python-pip python-setuptools python-wheel \
@@ -19,14 +19,14 @@ RUN apt-get update -y && apt-get install -q --yes --no-install-recommends \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://github.com/Motion-Project/motion/archive/release-4.0.1.tar.gz | tar xz && \
-   cd motion-release-4.0.1 && \
+RUN curl -sL https://github.com/Motion-Project/motion/archive/release-4.1.1.tar.gz | tar xz && \
+   cd motion-release-4.1.1 && \
    autoreconf -fiv && \
-   ./configure && \
+   ./configure --with-webp && \
    make && \
    make install && \
    cd .. && \
-   rm -rf motion-release-4.0.1
+   rm -rf motion-release-4.1.1
 
 RUN pip install motioneye
 
