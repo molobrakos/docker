@@ -12,9 +12,9 @@ docker rm $CONTAINER
 docker run \
 -d \
 --restart=always \
-
 --name $CONTAINER \
--p 1883:1883/tcp \
+-p 8883:8883/tcp \
 -v /etc/localtime:/etc/localtime:ro \
 -v $CONFIG:/config \
+-e XDG_CONFIG_HOME=/config \
 $IMAGE
