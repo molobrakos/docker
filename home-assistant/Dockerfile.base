@@ -12,6 +12,8 @@ RUN apk add --no-cache --update \
     linux-headers \
     nmap \
     libsodium \
+    make \
+    cython \
     curl \
         ffmpeg \
         && \
