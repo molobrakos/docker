@@ -4,6 +4,7 @@ VOLUME /config
 WORKDIR /app
 
 RUN apk add --no-cache --update \
+    dumb-init \
     gcc \
     g++ \
     make \
@@ -26,5 +27,7 @@ RUN apk add --no-cache --update \
     ;
 
 EXPOSE 8123
+
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
 HEALTHCHECK CMD curl -f -s -o /dev/null http://localhost:8123/api/ || exit 1

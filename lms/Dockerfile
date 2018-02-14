@@ -26,4 +26,4 @@ HEALTHCHECK CMD curl -s -f -o /dev/null -d '{"id":1,"method":"slim.request","par
 
 USER lms
 
-ENTRYPOINT [ "squeezeboxserver", "--user", "lms", "--prefsdir", "/config", "--logdir", "/logs", "--cachedir", "/cache" ]
+ENTRYPOINT [ "dumb-init", "squeezeboxserver", "--user", "lms", "--prefsdir", "/config", "--logdir", "/logs", "--cachedir", "/cache" ]
