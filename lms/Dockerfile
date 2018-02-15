@@ -8,7 +8,7 @@ VOLUME /config /music /logs /cache
 WORKDIR /lms
 
 RUN apt-get update && \
-    apt-get -y install curl pv supervisor faad flac lame sox libio-socket-ssl-perl && \
+    apt-get -y install curl pv supervisor faad flac lame sox libio-socket-ssl-perl dumb-init && \
     curl -O \
     http://downloads-origin.slimdevices.com/nightly$(curl http://downloads-origin.slimdevices.com/nightly/?ver=7.9 | grep -o '/7.9[^"]*amd64.deb') && \
     dpkg -i *.deb && \
