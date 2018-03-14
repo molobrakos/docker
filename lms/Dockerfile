@@ -22,7 +22,7 @@ RUN apt-get update && \
 
 EXPOSE 3483 3483/udp 9000 9090
 
-HEALTHCHECK CMD curl -s -f -o /dev/null -d '{"id":1,"method":"slim.request","params":["",["serverstatus"]]}' http://localhost:9000/jsonrpc.js || exit 1
+HEALTHCHECK CMD curl --max-time 5 --silent --fail --output /dev/null --data '{"id":1,"method":"slim.request","params":["",["serverstatus"]]}' http://localhost:9000/jsonrpc.js || exit 1
 
 USER lms
 
