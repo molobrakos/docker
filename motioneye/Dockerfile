@@ -1,10 +1,10 @@
-FROM debian:stretch
+FROM debian:stable-slim
 
 VOLUME /config /media
 WORKDIR /app
 
 RUN apt-get update -y && apt-get install -q --yes --no-install-recommends \
-  apt-utils libc6 libc6-dev libglib2.0-0 libzip-dev\
+  dumb-init apt-utils libc6 libc6-dev libglib2.0-0 libzip-dev\
   libjpeg62 libjpeg62-turbo-dev \
   zlib1g zlib1g-dev \
   wget build-essential autoconf automake libtool git \
@@ -45,7 +45,7 @@ CMD test -e /config/motion.conf ||  cp /usr/local/etc/motion/motion-dist.conf /c
     sed -i 's/\/var\/log/\/config/' /config/motioneye.conf && \
     sed -i 's/\/var\/lib\/motioneye/\/media/' /config/motioneye.conf && \
     sed -i 's/log_level debug/log_level info/' /config/motioneye.conf && \
-    meyectl startserver -c /config/motioneye.conf -d
+    dumb-init meyectl startserver -c /config/motioneye.conf -d
 
 HEALTHCHECK CMD curl -f http://localhost:8765/ && \
                 curl -s -f --connect-timeout 5 --head -o /dev/null http://localhost:8081 || exit 1
