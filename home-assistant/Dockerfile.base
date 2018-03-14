@@ -32,4 +32,4 @@ EXPOSE 8123
 
 ENTRYPOINT ["dumb-init", "--"]
 
-HEALTHCHECK CMD curl -f -s -o /dev/null http://localhost:8123/api/ || exit 1
+HEALTHCHECK CMD curl --max-time 5 --fail --silent --output /dev/null http://localhost:8123/api/ || exit 1
