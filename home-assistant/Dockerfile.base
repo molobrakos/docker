@@ -13,11 +13,12 @@ RUN apk add --no-cache --update \
     nmap \
     libsodium \
     make \
-    cython \
     curl \
+    libffi-dev \
+    openssl-dev \
         ffmpeg \
         && \
-    pip3 install --no-cache-dir --upgrade colorlog cchardet cython uvloop \
+    pip3 install --no-cache-dir --upgrade colorlog cchardet cython uvloop pywebpush \
         && \
     rm -rf /root/.cache && \
     rm -rf /var/cache/apk/* \
