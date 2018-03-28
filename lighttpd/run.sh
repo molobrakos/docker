@@ -10,6 +10,7 @@ docker pull $IMAGE
 docker run \
        --name $CONTAINER \
        --restart=always \
+       --net=bridge \
        -p 80:80/tcp \
        -p 443:443/tcp \
        -v /etc/localtime:/etc/localtime:ro \
