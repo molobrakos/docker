@@ -5,9 +5,9 @@ IMAGE=molobrakos/$CONTAINER:latest
 CONFIG=$HOME/.docker-$CONTAINER/config
 mkdir -p $CONFIG
 
+#docker pull $IMAGE
 docker stop $CONTAINER
 docker rm $CONTAINER
-#docker pull $IMAGE
 
 docker run \
 -d \
