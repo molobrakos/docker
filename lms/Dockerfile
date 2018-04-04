@@ -26,4 +26,4 @@ HEALTHCHECK CMD curl --max-time 5 --silent --fail --output /dev/null --data '{"i
 
 USER lms
 
-ENTRYPOINT [ "dumb-init", "squeezeboxserver", "--user", "lms", "--prefsdir", "/config", "--logdir", "/logs", "--cachedir", "/cache" ]
+ENTRYPOINT [ "dumb-init", "--", "squeezeboxserver", "--user", "lms", "--prefsdir", "/config", "--logdir", "/logs", "--cachedir", "/cache" ]
