@@ -16,9 +16,9 @@ mkdir -p $CACHE_DIR
 mkdir -p $LOG_DIR
 mkdir -p $MUSIC_DIR
 
+docker pull $IMAGE
 docker stop $CONTAINER
 docker rm $CONTAINER
-docker pull $IMAGE
 
 docker run -d --name $CONTAINER \
        --restart=always \
@@ -33,4 +33,3 @@ docker run -d --name $CONTAINER \
        $IMAGE \
 #      --nobrowsecache
 #      -v $HOME/src/lms-mobileskin/m:/usr/share/squeezeboxserver/HTML/m:ro \
-
