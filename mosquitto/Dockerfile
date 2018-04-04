@@ -16,6 +16,6 @@ EXPOSE 8883
 
 USER mqtt
 
-ENTRYPOINT [ "dumb-init", "mosquitto", "-c", "/config/mosquitto.conf" ]
+ENTRYPOINT [ "dumb-init", "--", "mosquitto", "-c", "/config/mosquitto.conf" ]
 
 HEALTHCHECK CMD mosquitto_pub -i healthcheck -t test -m ping || exit 1
