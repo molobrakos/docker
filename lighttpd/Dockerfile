@@ -14,7 +14,7 @@ RUN set -x \
 # it and change uid of the lighttpd user
 
 EXPOSE 80 443
-VOLUME /var/www /var/cache/lighttpd /var/log/etc/lighttpd
+VOLUME /var/www /var/cache/lighttpd /var/log/lighttpd /etc/lighttpd
 WORKDIR /app
 
 CMD [ "dumb-init", "--", "lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
