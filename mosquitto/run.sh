@@ -2,7 +2,7 @@
 
 CONTAINER=mqtt
 IMAGE=molobrakos/$CONTAINER:latest
-CONFIG=$HOME/.docker-$CONTAINER/config
+CONFIG=$HOME/.docker-$CONTAINER
 mkdir -p $CONFIG
 
 docker stop $CONTAINER
