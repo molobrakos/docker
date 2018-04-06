@@ -9,8 +9,9 @@ docker rm $CONTAINER
 
 docker run \
        --detach \
-       --name $CONTAINER \
        --restart=always \
+       --name $CONTAINER \
+       --hostname $CONTAINER \
        --net=bridge \
        -p 80:80/tcp \
        -p 443:443/tcp \
