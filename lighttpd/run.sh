@@ -3,9 +3,9 @@
 CONTAINER=lighttpd
 IMAGE=molobrakos/$CONTAINER:latest
 
-docker pull $IMAGE
 docker stop $CONTAINER
 docker rm $CONTAINER
+docker pull $IMAGE
 
 docker run \
        --detach \
