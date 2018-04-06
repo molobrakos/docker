@@ -3,7 +3,7 @@
 TAG=latest
 CONTAINER=home-assistant
 IMAGE=molobrakos/$CONTAINER:$TAG
-CONFIG=$HOME/.docker-$CONTAINER/config
+CONFIG=$HOME/.docker-$CONTAINER
 mkdir -p $CONFIG
 
 docker pull $IMAGE
