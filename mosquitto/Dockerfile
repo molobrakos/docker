@@ -4,7 +4,7 @@ VOLUME /config
 WORKDIR /app
 
 RUN apk add --no-cache --update \
-      mosquitto mosquitto-clients \
+      mosquitto mosquitto-clients ca-certificates dumb-init \
         && \
     rm -rf /root/.cache && \
     rm -rf /var/cache/apk/* \
@@ -12,10 +12,10 @@ RUN apk add --no-cache --update \
     adduser -H -D -s /bin/false mqtt \
     ;
 
-EXPOSE 1883
+EXPOSE 8883
 
 USER mqtt
 
-ENTRYPOINT [ "mosquitto", "-c", "/config/mosquitto.conf" ]
+ENTRYPOINT [ "dumb-init", "--", "mosquitto", "-c", "/config/mosquitto.conf" ]
 
-HEALTHCHECK CMD nc -z localhost 1883 || exit 1
+HEALTHCHECK CMD mosquitto_pub -i healthcheck -t test -m ping || exit 1

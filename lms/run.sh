@@ -9,17 +9,16 @@ CONFIG_DIR=$DIR/config
 CACHE_DIR=$DIR/cache
 LOG_DIR=$DIR/logs
 MUSIC_DIR=$DIR/music
-PLUGINS_DIR=$DIR/plugins
+#MUSIC_DIR=/mnt/media/Music
 
 mkdir -p $CONFIG_DIR
 mkdir -p $CACHE_DIR
 mkdir -p $LOG_DIR
 mkdir -p $MUSIC_DIR
-mkdir -p $PLUGINS_DIR
 
+docker pull $IMAGE
 docker stop $CONTAINER
 docker rm $CONTAINER
-docker pull $IMAGE
 
 docker run -d --name $CONTAINER \
        --restart=always \
@@ -31,5 +30,6 @@ docker run -d --name $CONTAINER \
        -v $CACHE_DIR:/cache \
        -v $LOG_DIR:/logs \
        -v $MUSIC_DIR:/music \
-       -v $PLUGINS_DIR:/usr/share/squeezeboxserver/Plugins \
-       $IMAGE
+       $IMAGE \
+#      --nobrowsecache
+#      -v $HOME/src/lms-mobileskin/m:/usr/share/squeezeboxserver/HTML/m:ro \
