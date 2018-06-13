@@ -21,7 +21,7 @@ docker stop $CONTAINER
 docker rm $CONTAINER
 
 docker run -d --name $CONTAINER \
-       --restart=always \
+       --restart always \
        -p 9000:9000 \
        -p 3483:3483 \
        -p 3483:3483/udp \

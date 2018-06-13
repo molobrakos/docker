@@ -10,10 +10,11 @@ docker stop $CONTAINER
 docker rm $CONTAINER
 
 docker run \
--d \
---restart=always \
+--detach \
+--restart always \
 --name $CONTAINER \
---net=bridge \
+--hostname $CONTAINER \
+--net bridge \
 -p 8883:8883/tcp \
 -v /etc/localtime:/etc/localtime:ro \
 -v $CONFIG:/config \

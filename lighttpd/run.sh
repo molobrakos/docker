@@ -9,10 +9,10 @@ docker rm $CONTAINER
 
 docker run \
        --detach \
-       --restart=always \
+       --restart always \
        --name $CONTAINER \
        --hostname $CONTAINER \
-       --net=bridge \
+       --net bridge \
        -p 80:80/tcp \
        -p 443:443/tcp \
        -v /etc/localtime:/etc/localtime:ro \
