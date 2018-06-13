@@ -11,10 +11,11 @@ docker stop $CONTAINER
 docker rm $CONTAINER
 
 docker run \
--d \
---restart=always \
---net=host \
+--detach \
+--restart always \
 --name $CONTAINER \
+--hostname $CONTAINER \
+--net host \
 -p 8123:8123/tcp \
 -v /etc/localtime:/etc/localtime:ro \
 -v $CONFIG:/config \

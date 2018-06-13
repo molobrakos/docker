@@ -20,7 +20,8 @@ run: config
 	docker run \
 	-d \
 	--restart=always \
-	--name $(CONTAINER) \
+	--name=$(CONTAINER) \
+	--hostname=$(CONTAINER) \
 	--net=bridge \
 	-p 8883:8883/tcp \
 	-v /etc/localtime:/etc/localtime:ro \
