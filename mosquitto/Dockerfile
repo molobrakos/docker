@@ -1,16 +1,17 @@
-FROM alpine:latest
+FROM debian:stable-slim
 
 VOLUME /config
 WORKDIR /app
 
-RUN apk add --no-cache --update \
-      mosquitto mosquitto-clients ca-certificates dumb-init \
-        && \
-    rm -rf /root/.cache && \
-    rm -rf /var/cache/apk/* \
-        && \
-    adduser -H -D -s /bin/false mqtt \
-    ;
+RUN set -x && \
+    apt-get update && \
+    apt-get -y install mosquitto ca-certificates dumb-init && \
+    apt-get -y autoremove && \
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
+    rm -rf /var/tmp/* && \
+    useradd --user-group --home-dir /app --shell /bin/false mqtt
 
 EXPOSE 8883
 
