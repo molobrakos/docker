@@ -1,16 +1,15 @@
 IMAGE=molobrakos/certbot
 
 build:
-	docker build -t $IMAGE .
+	docker build -t $(IMAGE) .
 
 run-gen:
 	docker run \
 	--rm \
 	-v /etc/letsencrypt/:/app \
 	-v /var/www/html/:/web \
-	molobrakos/certbot \
+	$(IMAGE) \
 	--noninteractive \
-	$IMAGE \
 	--webroot \
 	-w /web \
 	--domain home.e2.io
