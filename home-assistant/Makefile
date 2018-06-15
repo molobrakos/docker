@@ -2,10 +2,18 @@ CONTAINER="home-assistant"
 IMAGE="molobrakos/$(CONTAINER)"
 CONFIG="$(HOME)/.docker-$(CONTAINER)"
 
+PACKAGE="homeassistant"
+PACKAGE_DEV="https://github.com/home-assistant/home-assistant/archive/dev.zip"
+
 build:
-	docker build -t "$(IMAGE):base" -f Dockerfile.base .
-	docker build -t "$(IMAGE)" .
-	docker build -t "$(IMAGE):dev" -f Dockerfile.dev .
+	@echo "----- Building alpine"
+	docker build -t "$(IMAGE):alpine" -f Dockerfile.alpine .
+	@echo "----- Building debian"
+	docker build -t "$(IMAGE):debian" -f Dockerfile.debian .
+	@echo "----- Building alpine-dev"
+	docker build -t "$(IMAGE):alpine-dev" -f Dockerfile.alpine-dev
+	@echo "----- Building debian-dev"
+	docker build -t "$(IMAGE):debian-dev" -f Dockerfile.debian-dev
 
 run:
 	mkdir -p "$(CONFIG)"
@@ -13,10 +21,11 @@ run:
 	-docker stop "$(CONTAINER)"
 	-docker rm "$(CONTAINER)"
 	docker run \
-	-d \
+	--detachd \
 	--restart=always \
 	--net=host \
-	--name "$(CONTAINER)" \
+	--hosname="$(CONTAINER)" \
+	--name="$(CONTAINER)" \
 	-p 8123:8123/tcp \
 	-v /etc/localtime:/etc/localtime:ro \
 	-v "$(CONFIG):/config" \
