@@ -1,17 +1,22 @@
-#!/bin/bash
+NAME="lighttpd"
+CONTAINER="$(NAME)"
+IMAGE="molobrakos/$(NAME):latest"
 
-CONTAINER=lighttpd
-IMAGE=molobrakos/$CONTAINER:latest
+CONFIG_DIR="$(HOME)/.docker-lighttpd/"
+CONFIG="$(CONFIG_DIR)/lighttpd.conf"
 
-docker pull $IMAGE
-docker stop $CONTAINER
-docker rm $CONTAINER
+build:
+	docker build -t $(IMAGE) .
 
-docker run \
+config:
+	mkdir -p $(CONFIG_DIR)
+
+run: config
+	docker run \
        --detach \
-       --restart always \
-       --name $CONTAINER \
-       --hostname $CONTAINER \
+       --restart=always \
+       --name=$(CONTAINER) \
+       --hostname=$(CONTAINER) \
        --net bridge \
        -p 80:80/tcp \
        -p 443:443/tcp \
@@ -22,6 +27,6 @@ docker run \
        -v /usr/share/lighttpd:/usr/share/lighttpd:ro \
        -v /var/www:/var/www:ro \
        -v /var/log/lighttpd:/var/log/lighttpd \
-       -v $HOME/.docker-lighttpd/lighttpd.conf:/etc/lighttpd/lighttpd.conf:ro \
+       -v $(CONFIG):/etc/lighttpd/lighttpd.conf:ro \
        -v /etc/mime.types:/etc/mime.types:ro \
-        $IMAGE
+        $(IMAGE)
