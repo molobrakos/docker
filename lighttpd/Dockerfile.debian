@@ -16,3 +16,5 @@ WORKDIR /app
 CMD [ "dumb-init", "--", "lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
 
 HEALTHCHECK --interval=1m --timeout=3s CMD curl --head --fail --silent http://localhost > /dev/null || exit 1
+
+# RUN lighttpd -v
