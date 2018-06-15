@@ -1,12 +1,13 @@
-NAME="lighttpd"
-CONTAINER="$(NAME)"
-IMAGE="molobrakos/$(NAME):latest"
+NAME=lighttpd
+CONTAINER=$(NAME)
+IMAGE=molobrakos/$(NAME)
 
 CONFIG_DIR="$(HOME)/.docker-lighttpd/"
 CONFIG="$(CONFIG_DIR)/lighttpd.conf"
 
 build:
-	docker build -t $(IMAGE) .
+	docker build -f Dockerfile.debian -t $(IMAGE):debian .
+	docker build -f Dockerfile.alpine -t $(IMAGE):alpine .
 
 config:
 	mkdir -p $(CONFIG_DIR)
@@ -17,7 +18,7 @@ run: config
        --restart=always \
        --name=$(CONTAINER) \
        --hostname=$(CONTAINER) \
-       --net bridge \
+       --net=bridge \
        -p 80:80/tcp \
        -p 443:443/tcp \
        -v /etc/localtime:/etc/localtime:ro \
@@ -29,4 +30,4 @@ run: config
        -v /var/log/lighttpd:/var/log/lighttpd \
        -v $(CONFIG):/etc/lighttpd/lighttpd.conf:ro \
        -v /etc/mime.types:/etc/mime.types:ro \
-        $(IMAGE)
+        $(IMAGE):alpine
