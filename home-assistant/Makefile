@@ -5,15 +5,17 @@ CONFIG="$(HOME)/.docker-$(CONTAINER)"
 PACKAGE="homeassistant"
 PACKAGE_DEV="https://github.com/home-assistant/home-assistant/archive/dev.zip"
 
+# FIXME: Files could be auto generated, with vars base_image and hass_dist
+
 build:
 	@echo "----- Building alpine"
 	docker build -t "$(IMAGE):alpine" -f Dockerfile.alpine .
 	@echo "----- Building debian"
 	docker build -t "$(IMAGE):debian" -f Dockerfile.debian .
 	@echo "----- Building alpine-dev"
-	docker build -t "$(IMAGE):alpine-dev" -f Dockerfile.alpine-dev
+	docker build -t "$(IMAGE):alpine-dev" -f Dockerfile.alpine-dev .
 	@echo "----- Building debian-dev"
-	docker build -t "$(IMAGE):debian-dev" -f Dockerfile.debian-dev
+	docker build -t "$(IMAGE):debian-dev" -f Dockerfile.debian-dev .
 
 run:
 	mkdir -p "$(CONFIG)"
