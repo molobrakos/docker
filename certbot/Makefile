@@ -1,4 +1,5 @@
-IMAGE=molobrakos/certbot
+CONTAINER=certbot
+IMAGE=molobrakos/$(CONTAINER)
 
 build:
 	docker build -t $(IMAGE) .
@@ -6,6 +7,7 @@ build:
 run-gen:
 	docker run \
 	--rm \
+	--name=$(CONTAINER) \
 	-v /etc/letsencrypt/:/app \
 	-v /var/www/html/:/web \
 	$(IMAGE) \
@@ -17,6 +19,7 @@ run-gen:
 run-renew:
 	docker run \
 	--rm \
+	--name=$(CONTAINER) \
 	-v /etc/letsencrypt:/app \
 	-v /var/www/html:/web \
 	$IMAGE \

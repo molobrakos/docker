@@ -1,0 +1,50 @@
+# -------------------------------------------------------------------
+
+FROM python:3.6-alpine3.7
+
+RUN set -x && \
+    apk add --no-cache --update \
+      dumb-init \
+      gcc \
+      g++ \
+      make \
+      musl-dev \
+      linux-headers \
+      nmap \
+      libsodium \
+      make \
+      curl \
+      libffi-dev \
+      openssl-dev \
+      ffmpeg \
+    rm -rf /root/.cache && \
+    rm -rf /var/cache/apk/* && \
+    \
+    adduser -H -D -s /bin/false home-assistant && \
+    \
+    # https://github.com/gliderlabs/docker-alpine/issues/253
+    chmod u+s /bin/ping \
+    ;
+
+# -------------------------------------------------------------------
+
+VOLUME /config
+WORKDIR /app
+
+RUN pip3 install --no-cache-dir --upgrade colorlog cchardet cython uvloop pywebpush
+
+EXPOSE 8123
+
+ENTRYPOINT ["dumb-init", "--"]
+
+HEALTHCHECK CMD curl --max-time 5 --fail --silent --output /dev/null http://localhost:8123/manifest.json || exit 1
+
+CMD [ "dumb-init", "--", "hass", "--config", "/config" ]
+
+# -------------------------------------------------------------------
+
+RUN pip3 install --no-cache-dir --upgrade https://github.com/home-assistant/home-assistant/archive/dev.zip
+
+# -------------------------------------------------------------------
+
+USER home-assistant

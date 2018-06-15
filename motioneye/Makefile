@@ -1,6 +1,8 @@
-CONTAINER="mqtt"
-IMAGE="molobrakos/$(CONTAINER):latest"
+NAME="motioneye"
+CONTAINER="$(NAME)"
+IMAGE="molobrakos/$(NAME):latest"
 CONFIG="$(HOME)/.docker-$(CONTAINER)"
+MEDIA=/mnt/motion
 
 build:
 	docker build . -t $(IMAGE)
@@ -18,13 +20,16 @@ run: config
 	-docker stop $(CONTAINER)
 	-docker rm $(CONTAINER)
 	docker run \
-	-d \
+	--detach \
 	--restart=always \
 	--name="$(CONTAINER)" \
 	--hostname="$(CONTAINER)" \
 	--net=bridge \
-	-p 8883:8883/tcp \
-	-v /etc/localtime:/etc/localtime:ro \
-	-v "$(CONFIG):/config" \
-	-e XDG_CONFIG_HOME=/config \
+        -p 8080:8080 \
+        -p 8081:8081 \
+        -p 8082:8082 \
+        -p 8765:8765 \
+        -v /etc/localtime:/etc/localtime:ro \
+        -v $CONFIG:/config \
+        -v $MEDIA:/media \
 	$(IMAGE)
