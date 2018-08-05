@@ -5,7 +5,7 @@ WORKDIR /app
 
 RUN set -x && \
     apt-get update && \
-    apt-get -y install mosquitto ca-certificates dumb-init && \
+    apt-get -y install mosquitto mosquitto-clients ca-certificates dumb-init && \
     apt-get -y autoremove && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
