@@ -2,7 +2,7 @@ NAME=lighttpd
 CONTAINER=$(NAME)
 IMAGE=molobrakos/$(NAME)
 
-CONFIG_DIR="$(HOME)/.docker-lighttpd/"
+CONFIG_DIR="$(HOME)/.docker/$(CONTAINER)"
 
 build:
 	docker build -f Dockerfile.debian -t $(IMAGE):debian .

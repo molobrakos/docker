@@ -1,6 +1,6 @@
 CONTAINER="mqtt"
 IMAGE="molobrakos/$(CONTAINER):latest"
-CONFIG="$(HOME)/.docker-$(CONTAINER)"
+CONFIG="$(HOME)/.docker/$(CONTAINER)"
 
 build:
 	docker build . -t $(IMAGE)

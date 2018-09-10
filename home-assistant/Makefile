@@ -1,6 +1,6 @@
 CONTAINER="home-assistant"
 IMAGE="molobrakos/$(CONTAINER)"
-CONFIG="$(HOME)/.docker-$(CONTAINER)"
+CONFIG="$(HOME)/.docker/$(CONTAINER)"
 
 PACKAGE="homeassistant"
 PACKAGE_DEV="https://github.com/home-assistant/home-assistant/archive/dev.zip"
