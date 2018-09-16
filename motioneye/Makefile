@@ -1,7 +1,7 @@
 NAME=motioneye
 CONTAINER=$(NAME)
-IMAGE=molobrakos/$(NAME):latest
-CONFIG=$(HOME)/.docker-$(CONTAINER)
+IMAGE=molobrakos/$(NAME)
+CONFIG=$(HOME)/.docker/$(CONTAINER)
 MEDIA=/mnt/motion
 
 build:
@@ -30,6 +30,8 @@ run: config
         -p 8082:8082 \
         -p 8765:8765 \
         -v /etc/localtime:/etc/localtime:ro \
+        -v /etc/timezone:/etc/timezone:ro \
+	-v /dev/dri:/dev/dri \
         -v $(CONFIG):/config \
         -v $(MEDIA):/media \
 	$(IMAGE)
