@@ -14,6 +14,7 @@ RUN apt-get update -y && apt-get install -q --yes --no-install-recommends \
   libjpeg-dev libwebp-dev \
   libzip-dev \
   x264 \
+  mesa-va-drivers va-driver-all vainfo i965-va-driver mesa-vdpau-drivers libgl1-mesa-dri libgl1-mesa-glx libglapi-mesa libvdpau-va-gl1 libva-drm1 vdpau-va-driver libdrm-intel1 \ 
   python python-dev python-pip python-setuptools python-wheel \
   lsb-release pkg-config curl libcurl4-openssl-dev && \
   apt-get clean && \
@@ -28,7 +29,7 @@ RUN curl -sL https://github.com/Motion-Project/motion/archive/release-4.1.1.tar.
    cd .. && \
    rm -rf motion-release-4.1.1
 
-RUN pip install motioneye
+RUN pip install --upgrade motioneye
 
 RUN adduser --no-create-home --disabled-password --gecos '' --shell /bin/false motion
 
