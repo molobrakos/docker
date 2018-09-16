@@ -3,7 +3,8 @@ FROM debian:stable-slim
 VOLUME /config /media
 WORKDIR /app
 
-RUN apt-get update -y && apt-get install -q --yes --no-install-recommends \
+RUN set -x && \
+  apt-get update -y && apt-get install -q --yes --no-install-recommends \
   dumb-init apt-utils libc6 libc6-dev libglib2.0-0 libzip-dev\
   libjpeg62 libjpeg62-turbo-dev \
   zlib1g zlib1g-dev \
@@ -14,19 +15,29 @@ RUN apt-get update -y && apt-get install -q --yes --no-install-recommends \
   libjpeg-dev libwebp-dev \
   libzip-dev \
   x264 \
+  mesa-va-drivers va-driver-all vainfo i965-va-driver mesa-vdpau-drivers libgl1-mesa-dri libgl1-mesa-glx libglapi-mesa libvdpau-va-gl1 libva-drm1 vdpau-va-driver libdrm-intel1 \
   python python-dev python-pip python-setuptools python-wheel \
-  lsb-release pkg-config curl libcurl4-openssl-dev && \
+  lsb-release pkg-config curl libcurl4-openssl-dev \
+  nasm yasm libmicrohttpd-dev && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://github.com/Motion-Project/motion/archive/release-4.1.1.tar.gz | tar xz && \
-   cd motion-release-4.1.1 && \
+RUN curl -sL https://www.ffmpeg.org/releases/ffmpeg-4.0.2.tar.gz | tar xz && \
+  cd ffmpeg-4.0.2 && \
+  ./configure && \
+  make && \
+  make install && \
+  cd .. && \
+  rm -rf ffmpeg-4.0.2
+
+RUN curl -sL https://github.com/Motion-Project/motion/archive/master.tar.gz | tar xz && \
+   cd motion-master && \
    autoreconf -fiv && \
    ./configure --with-webp && \
    make && \
    make install && \
    cd .. && \
-   rm -rf motion-release-4.1.1
+   rm -rf motion-master
 
 RUN pip install motioneye
 
