@@ -1,13 +1,13 @@
-CONTAINER="lms"
-IMAGE="molobrakos/$(CONTAINER):latest"
+CONTAINER=lms
+IMAGE=molobrakos/$(CONTAINER):latest
 
-DIR="$(HOME)/.docker-$(CONTAINER)"
+DIR=$(HOME)/.docker/$(CONTAINER)
 
-CONFIG_DIR="$(DIR)/config"
-CACHE_DIR="$(DIR)/cache"
-LOG_DIR="$(DIR)/logs"
-MUSIC_DIR="$(DIR)/music"
-MUSIC_DIR="/mnt/media/Music"
+CONFIG_DIR=$(DIR)/config
+CACHE_DIR=$(DIR)/cache
+LOG_DIR=$(DIR)/logs
+MUSIC_DIR=$(DIR)/music
+MUSIC_DIR=/mnt/media/Music
 
 build:
 	docker build -t $(IMAGE) .
