@@ -1,6 +1,8 @@
 CONTAINER=home-assistant
 IMAGE=molobrakos/$(CONTAINER)
 CONFIG=$(HOME)/.docker/$(CONTAINER)
+DEFAULT_TAG=debian
+DEFAULT_IMAGE=$(IMAGE):$(DEFAULT_TAG)
 
 PACKAGE=homeassistant
 PACKAGE_DEV=https://github.com/home-assistant/home-assistant/archive/dev.zip
@@ -19,16 +21,16 @@ build:
 
 run:
 	mkdir -p $(CONFIG)
-	docker pull $(IMAGE)
+#	docker pull $(IMAGE)
 	-docker stop $(CONTAINER)
 	-docker rm $(CONTAINER)
 	docker run \
 	--detach=true \
 	--restart=always \
 	--net=host \
-	--hosname=$(CONTAINER) \
+	--hostname=$(CONTAINER) \
 	--name=$(CONTAINER) \
 	-p 8123:8123/tcp \
 	-v /etc/localtime:/etc/localtime:ro \
 	-v $(CONFIG):/config \
-	$(IMAGE):debian
+	$(DEFAULT_IMAGE)
