@@ -15,8 +15,10 @@ RUN set -x && \
       curl \
       libffi-dev \
       ffmpeg \
-      net-tools \  # arp
-      iputils-ping \  # ping
+      # arp
+      net-tools \
+      # ping
+      iputils-ping \
       && \
     \
     apt-get -y autoremove && \
