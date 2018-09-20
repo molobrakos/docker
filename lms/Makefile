@@ -26,6 +26,7 @@ run:
 		-p 3483:3483 \
 		-p 3483:3483/udp \
 		-v /etc/localtime:/etc/localtime:ro \
+		-v /etc/timezone:/etc/timezone:ro \
 		-v "$(CONFIG_DIR):/config" \
 		-v "$(CACHE_DIR):/cache" \
 		-v "$(LOG_DIR):/logs" \
