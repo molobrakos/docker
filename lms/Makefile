@@ -7,7 +7,7 @@ CONFIG_DIR=$(DIR)/config
 CACHE_DIR=$(DIR)/cache
 LOG_DIR=$(DIR)/logs
 MUSIC_DIR=$(DIR)/music
-MUSIC_DIR=/mnt/music
+MUSIC_DIR=/mnt/media/Music
 
 build:
 	docker build -t $(IMAGE) .
@@ -21,8 +21,8 @@ run:
 	-docker stop "$(CONTAINER)"
 	-docker rm "$(CONTAINER)"
 	docker run \
-	        --detach \
-	        --name=$(CONTAINER) \
+                --detach \
+                --name=$(CONTAINER) \
 		--restart=always \
 		-p 9000:9000 \
 		-p 3483:3483 \
