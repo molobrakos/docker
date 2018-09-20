@@ -23,7 +23,7 @@ run:
 	-docker stop $(CONTAINER)
 	-docker rm $(CONTAINER)
 	docker run \
-	--detached \
+	--detach=true \
 	--restart=always \
 	--net=host \
 	--hosname=$(CONTAINER) \
@@ -31,4 +31,4 @@ run:
 	-p 8123:8123/tcp \
 	-v /etc/localtime:/etc/localtime:ro \
 	-v $(CONFIG):/config \
-	"$(IMAGE)"
+	$(IMAGE):debian
