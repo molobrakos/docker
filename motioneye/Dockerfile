@@ -39,7 +39,7 @@ RUN curl -sL https://github.com/Motion-Project/motion/archive/master.tar.gz | ta
    cd .. && \
    rm -rf motion-master
 
-RUN pip install --upgrade motioneye
+RUN pip install --upgrade pip motioneye
 
 RUN adduser --no-create-home --disabled-password --gecos '' --shell /bin/false motion
 
