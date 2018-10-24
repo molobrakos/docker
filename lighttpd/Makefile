@@ -5,8 +5,7 @@ IMAGE=molobrakos/$(NAME)
 CONFIG_DIR="$(HOME)/.docker/$(CONTAINER)"
 
 build:
-	docker build -f Dockerfile.debian -t $(IMAGE):debian .
-	docker build -f Dockerfile.alpine -t $(IMAGE):alpine .
+	docker build -t $(IMAGE):alpine .
 
 config:
 	mkdir -p $(CONFIG_DIR)
