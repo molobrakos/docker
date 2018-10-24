@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM ubuntu:18.04
 
 VOLUME /app
 WORKDIR /app
