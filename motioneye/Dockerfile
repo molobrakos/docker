@@ -6,16 +6,16 @@ WORKDIR /app
 RUN set -x && \
   apt-get update -y && apt-get install -q --yes --no-install-recommends \
   dumb-init apt-utils libc6 libc6-dev libglib2.0-0 libzip-dev\
-  libjpeg62 libjpeg62-turbo-dev \
+  libjpeg62 libjpeg-turbo8-dev \
   zlib1g zlib1g-dev \
   wget build-essential autoconf automake libtool git \
-  libavformat-dev libavcodec-dev libavutil-dev libav-tools libavdevice-dev libswscale-dev \
+  libavformat-dev libavcodec-dev libavutil-dev libavdevice-dev libswscale-dev \
   libsqlite3-dev \
   v4l-utils python-pip python-dev libssl-dev libcurl4-openssl-dev libjpeg-dev ffmpeg \
   libjpeg-dev libwebp-dev \
   libzip-dev \
   x264 \
-  mesa-va-drivers va-driver-all vainfo i965-va-driver mesa-vdpau-drivers libgl1-mesa-dri libgl1-mesa-glx libglapi-mesa libvdpau-va-gl1 libva-drm1 vdpau-va-driver libdrm-intel1 \
+  mesa-va-drivers va-driver-all vainfo i965-va-driver mesa-vdpau-drivers libgl1-mesa-dri libgl1-mesa-glx libglapi-mesa libvdpau-va-gl1 vdpau-va-driver libdrm-intel1 \
   python python-dev python-pip python-setuptools python-wheel \
   lsb-release pkg-config curl libcurl4-openssl-dev \
   nasm yasm libmicrohttpd-dev && \
