@@ -4,7 +4,7 @@ FROM python:3.6-slim-stretch
 
 RUN set -x && \
     apt-get update && \
-    apt-get -y install \
+    apt-get -y --no-install-recommends install \
       dumb-init \
       gcc \
       g++ \
