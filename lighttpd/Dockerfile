@@ -1,27 +1,44 @@
-FROM alpine:edge
+FROM debian:stable-slim as build
 
-# We need at least 1.4.46
-# Ubuntu only provides 1.4.45
+WORKDIR /build
 
-RUN set -x \
-  && apk add --update --no-cache \
-       lighttpd curl dumb-init shadow perl \
-  && rm -rf /var/cache/apk/* \
-  && rm -rf /var/cache/misc/* \
-  && deluser xfs \
-  && usermod -u 33 lighttpd \
-    ;
+RUN set -x && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get -y --no-install-recommends install build-essential curl ca-certificates \
+         file libpcre3-dev pkg-config libev-dev zlib1g-dev libbz2-dev libssl-dev && \
+    curl -L https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-1.4.51.tar.gz | tar xz && \
+    cd lighttpd-1.4.51 && \
+    ./configure --with-openssl --with-libev --prefix=/usr/local && \
+    make && make install && find /usr/local
 
-# Default user xfs (x font server) in alpine has uid 33 which
-# corresponds to user www-data in debian/ubuntu. Lets delete
-# it and change uid of the lighttpd user
+FROM debian:stable-slim
+
+RUN set -x && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get -y --no-install-recommends install curl dumb-init ca-certificates \
+      libpcre3 libev4 zlib1g libbz2-1.0 libssl1.1 && \
+    apt-get -y autoremove && \
+    apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
+    rm -rf /var/tmp/*
 
 EXPOSE 80 443
 VOLUME /var/www /var/cache/lighttpd /var/log/lighttpd /etc/lighttpd
 WORKDIR /app
 
+COPY --from=build /usr/local /usr/local
+
+RUN find /usr/local
+
 CMD [ "dumb-init", "--", "lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
 
 HEALTHCHECK --interval=1m --timeout=3s CMD curl --head --fail --silent http://localhost > /dev/null || exit 1
 
-# RUN lighttpd -v
+# We want at least 1.4.46 (proxy upgrade support)
+# We want at least 1.4.51 (fix for SSL content negotiation)
+
+RUN which lighttpd && lighttpd -v
+
