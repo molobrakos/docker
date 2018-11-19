@@ -6,6 +6,7 @@ CONFIG_DIR="$(HOME)/.docker/$(CONTAINER)"
 
 build:
 	docker build -t $(IMAGE) .
+	docker build -t $(IMAGE):alpine -f Dockerfile.alpine .
 
 config:
 	mkdir -p $(CONFIG_DIR)
