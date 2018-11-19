@@ -5,8 +5,7 @@ IMAGE=molobrakos/$(NAME)
 CONFIG_DIR="$(HOME)/.docker/$(CONTAINER)"
 
 build:
-	docker build -f Dockerfile.debian -t $(IMAGE):debian .
-	docker build -f Dockerfile.alpine -t $(IMAGE):alpine .
+	docker build -t $(IMAGE) .
 
 config:
 	mkdir -p $(CONFIG_DIR)
@@ -27,4 +26,4 @@ run: config
           -v /var/cache/lighttpd:/var/cache/lighttpd:rw \
           -v $CONFIG_DIR/lighttpd.conf:/etc/lighttpd/lighttpd.conf:ro \
           -v $CONFIG_DIR/mime.types.conf:/etc/lighttpd/mime.types.conf:ro \
-	  $(IMAGE):alpine
+	  $(IMAGE)
