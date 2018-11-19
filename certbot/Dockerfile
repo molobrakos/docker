@@ -1,11 +1,11 @@
-FROM debian:stable-slim
+FROM ubuntu:18.04
 
 VOLUME /app
 WORKDIR /app
 
 RUN set -x && \
     apt-get update && \
-    apt-get -y install certbot && \
+    apt-get -y --no-install-recommends install certbot && \
     apt-get -y autoremove && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/* && \
