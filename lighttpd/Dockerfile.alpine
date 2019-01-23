@@ -1,12 +1,13 @@
-FROM alpine:edge
+FROM alpine
 
 RUN set -x \
   && apk add --update --no-cache \
-     lighttpd curl dumb-init shadow perl \
+     lighttpd=1.4.49-r1 curl dumb-init shadow perl \
   && rm -rf /var/cache/apk/* \
   && rm -rf /var/cache/misc/* \
   && deluser xfs \
   && usermod -u 33 lighttpd \
+  && usermod -l www-data lighttpd \
        ;
 
 # Default user xfs (x font server) in alpine has uid 33 which
@@ -21,4 +22,4 @@ CMD [ "dumb-init", "--", "lighttpd", "-D", "-f", "/etc/lighttpd/lighttpd.conf"]
 
 HEALTHCHECK --interval=1m --timeout=3s CMD curl --head --fail --silent http://localhost > /dev/null || exit 1
 
-# RUN lighttpd -v
+RUN which lighttpd && lighttpd -v
