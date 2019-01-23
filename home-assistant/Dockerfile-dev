@@ -35,8 +35,6 @@ WORKDIR /app
 
 RUN pip3 install --no-cache-dir --upgrade pip colorlog cchardet cython uvloop pywebpush
 
-EXPOSE 8123
-
 HEALTHCHECK CMD curl --max-time 5 --fail --silent --output /dev/null http://localhost:8123/manifest.json || exit 1
 
 CMD [ "dumb-init", "--", "hass", "--config", "/config" ]
